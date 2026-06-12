@@ -1,0 +1,274 @@
+
+-- Tipe data --
+
+
+Buat program 'Kartu Identitas Digital':
+• Gunakan const untuk nama & kota
+• Gunakan let untuk umur & statusKerja
+• Tampilkan semua ke console pakai template literal
+• Coba ubah nilai umur dan print ulang
+
+
+-- Pengkodisian --
+
+
+Studi kasus 1 - Buat 'Kalkulator Diskon':
+• ≥ 1.000.000 → diskon 20%
+• ≥ 500.000 → diskon 10%
+• < 500.000 → tidak ada diskon
+• Tampilkan harga akhir setelah diskon
+Bonus: tambah switch untuk kategori member
+Studi Kasus 2 — Tarif Parkir
+Kendaraan: motor / mobil / truk
+Durasi parkir dalam jam
+Motor:
+  < 1 jam → Rp2.000
+  < 3 jam → Rp5.000
+  >= 3 jam → Rp10.000
+Mobil:
+  < 1 jam → Rp5.000
+  < 3 jam → Rp10.000
+  >= 3 jam → Rp20.000
+Truk:
+  flat Rp50.000 berapapun jamnya
+Tampilkan: jenis kendaraan, durasi, dan total tarif
+
+
+-- Perulangan --
+
+
+Studi Kasus 1 - Selesaikan FizzBuzz (1-30):
+• Habis dibagi 3 → 'Fizz'
+• Habis dibagi 5 → 'Buzz'
+• Habis dibagi keduanya → 'FizzBuzz'
+• Selainnya → tampilkan angkanya
+Bonus: buat tabel perkalian 1-10
+
+Studi Kasus 2 — Hitung Mundur Roket 🚀
+Hitung mundur dari 10 sampai 0
+Setiap angka print "T-{angka} detik..."
+Kalau sudah 0, print "🚀 Roket Meluncur!"
+Output:
+T-10 detik...
+T-9 detik...
+T-0 detik...
+🚀 Roket Meluncur!
+
+Studi Kasus 3 — Mesin Kasir 🧾
+Punya array belanjaan:
+["Indomie", "Telur", "Kopi", "Gula", "Susu"]
+Loop array itu dan print dengan nomor urut:
+1. Indomie
+2. Telur
+3. Kopi
+4. Gula
+5. Susu
+Total: 5 item belanjaan
+Hint: pakai for...of atau for biasa, dan ingat index array mulai dari 0
+
+Studi Kasus 4 — Segitiga Bintang ⭐
+Print segitiga bintang 5 baris pakai nested loop:
+*
+**
+***
+****
+*****
+Hint: loop luar = baris, loop dalam = bintangnya
+
+1. Segitiga Terbalik
+*****
+****
+***
+**
+*
+2. Piramida
+    *
+   ***
+  *****
+ *******
+*********
+3. Papan Catur 4x4
+# # # #
+ # # # #
+# # # #
+ # # # #
+
+
+ -- Fungsi --
+
+
+Studi Kasus 1 - Buat fungsi 'Kalkulator BMI':
+• Parameter: berat (kg) dan tinggi (m)
+• Return: { bmi, kategori }
+• Kategori: Kurus <18.5, Normal 18.5-24.9, Gemuk ≥25
+• Gunakan arrow function
+• Test dengan 3 data berbeda
+
+Studi Kasus 2 — Konversi Suhu 🌡️
+Buat 3 fungsi:
+- celsiusKefahrenheit(c)  → F = (c * 9/5) + 32
+- fahrenheitKeCelsius(f)  → C = (f - 32) * 5/9
+- celsiusKeKelvin(c)      → K = c + 273.15
+Test masing-masing fungsi dengan 3 angka berbeda
+Output:
+25°C = 77°F
+77°F = 25°C
+25°C = 298.15K
+
+Studi Kasus 3 — Kalkulator Belanja 🛒
+Buat fungsi hitungBelanja dengan input:
+- nama pembeli
+- array harga barang (misal: [15000, 25000, 8000])
+- kategori member: "gold" / "silver" / "reguler"
+
+Diskon:
+- gold   → 20%
+- silver → 10%
+- reguler → 0%
+
+Output:
+Nama          : Zaq
+Total Belanja : Rp48.000
+Diskon        : 20%
+Potongan      : Rp9.600
+Total Bayar   : Rp38.400
+
+
+-- Array --
+
+
+Studi Kasus - 1 Buat 'To-Do List Console':
+• Simpan tugas dalam array
+• Fungsi tambahTugas(tugas)
+• Fungsi hapusTugas(index)
+• Fungsi tampilkanSemua()
+• Gunakan: push, filter, map, find
+• Bonus: fungsi cariTugas(keyword)
+
+
+Studi Kasus 2 - Nilai Rapor Kelas 📊
+Data awal — array of objects:
+const siswa = [
+  { nama: "Budi",  nilai: 45 },
+  { nama: "Siti",  nilai: 78 },
+  { nama: "Zaq",   nilai: 92 },
+  { nama: "Andi",  nilai: 55 },
+  { nama: "Rudi",  nilai: 88 },
+  { nama: "Dewi",  nilai: 40 }
+]
+Buat 4 fungsi:
+1. tampilkanSemua()
+   → tampilkan semua siswa + nilainya bernomor urut
+2. sisweLulus()
+   → tampilkan hanya siswa yang nilainya >= 60
+3. nilaiTertinggi()
+   → tampilkan siswa dengan nilai tertinggi
+4. rataRata()
+   → hitung dan tampilkan rata-rata nilai kelas
+
+//Struk Belanja
+
+Data awal:
+const keranjang = [
+  { nama: "Indomie",  harga: 3500  },
+  { nama: "Telur",    harga: 28000 },
+  { nama: "Kopi",     harga: 12000 },
+  { nama: "Gula",     harga: 14000 },
+  { nama: "Susu",     harga: 18000 }
+]
+
+Tugas:
+1. Semua harga kena pajak 11%
+   → pakai map, buat array baru dengan harga setelah pajak
+
+2. Tampilkan struk belanja:
+   Indomie  → Rp3.500  + pajak Rp385    = Rp3.885
+   Telur    → Rp28.000 + pajak Rp3.080  = Rp31.080
+   ...dst
+
+3. Tampilkan total belanja setelah pajak
+   → pakai reduce
+
+
+-- Object --
+
+//Sistem Toko Online
+
+Data awal:
+const produk = [
+  { id: 1, nama: "Laptop",   harga: 8000000, stok: 5,  kategori: "Elektronik" },
+  { id: 2, nama: "Mouse",    harga: 150000,  stok: 20, kategori: "Elektronik" },
+  { id: 3, nama: "Meja",     harga: 750000,  stok: 8,  kategori: "Furnitur"   },
+  { id: 4, nama: "Kursi",    harga: 500000,  stok: 12, kategori: "Furnitur"   },
+  { id: 5, nama: "Keyboard", harga: 300000,  stok: 15, kategori: "Elektronik" }
+]
+
+Buat 5 fungsi:
+
+1. tampilkanSemua()
+   → tampilkan semua produk bernomor urut
+   → gunakan destructuring di dalam loop
+
+2. cariProduk(keyword)
+   → cari produk berdasarkan nama
+   → tampilkan semua info produk yang ditemukan
+
+3. filterKategori(kategori)
+   → tampilkan semua produk berdasarkan kategori
+   → contoh: filterKategori("Elektronik")
+
+4. tambahStok(id, jumlah)
+   → tambah stok produk berdasarkan id
+   → tampilkan stok sebelum dan sesudah
+
+5. ringkasan()
+   → tampilkan total produk
+   → tampilkan total nilai stok keseluruhan (harga * stok)
+   → tampilkan produk termahal
+   → gunakan reduce
+
+// Manajemen kontak
+
+Data awal:
+const kontak = [
+  { id: 1, nama: "Budi",  telepon: "081234567890", grup: "Keluarga" },
+  { id: 2, nama: "Siti",  telepon: "082345678901", grup: "Kerja"    },
+  { id: 3, nama: "Zaq",   telepon: "083456789012", grup: "Teman"    },
+  { id: 4, nama: "Andi",  telepon: "084567890123", grup: "Kerja"    },
+  { id: 5, nama: "Rudi",  telepon: "085678901234", grup: "Keluarga" },
+  { id: 6, nama: "Dewi",  telepon: "086789012345", grup: "Teman"    }
+]
+
+Buat 6 fungsi:
+
+1. tampilkanSemua()
+   → tampilkan semua kontak bernomor urut
+   → gunakan destructuring
+
+2. cariKontak(keyword)
+   → cari berdasarkan nama
+   → tampilkan semua hasil yang cocok
+   → kalau tidak ketemu → tampilkan pesan error
+
+3. filterGrup(grup)
+   → tampilkan semua kontak berdasarkan grup
+   → contoh: filterGrup("Kerja")
+
+4. tambahKontak(nama, telepon, grup)
+   → tambah kontak baru ke array
+   → id otomatis = id terakhir + 1
+   → tampilkan pesan sukses
+
+5. hapusKontak(id)
+   → hapus kontak berdasarkan id
+   → tampilkan nama kontak yang dihapus
+   → kalau id tidak ada → tampilkan pesan error
+
+6. ringkasan()
+   → tampilkan total kontak
+   → tampilkan jumlah kontak per grup
+   → contoh output:
+      Total kontak: 6
+      Keluarga: 2
+      Kerja: 2
+      Teman: 2
