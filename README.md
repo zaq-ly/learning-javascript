@@ -32,10 +32,3 @@ Repo ini berisi kumpulan materi dan studi kasus JavaScript yang saya pelajari se
 
 ## 🛠️ Teknologi
 - HTML, CSS, JavaScript (Vanilla)
-- ES6+
-
----
-
-## 👤 Author
-**Muhammad Zaqly Luluang**
-📍 Ambon, Indonesia
