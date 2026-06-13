@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .lulus { 
+      color: green; }
+    .gagal { 
+      color: red; }
+    .item-siswa {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Daftar Nilai Siswa</h2>
+  <input id="inputNama" type="text" placeholder="Nama siswa..." />
+  <input id="inputNilai" type="number" placeholder="Nilai..." />
+  <button id="btnTambah">Tambah</button>
+
+  <ul id="daftarSiswa"></ul>
+
+</body>
+<script>
+
+const btnTambah = document.getElementById("btnTambah")
+const daftarSiswa = document.getElementById("daftarSiswa")
+
+const tambahDaftar = () => {
+  const nilaiSiswa = {
+    nama: document.getElementById("inputNama").value,
+    nilai: document.getElementById("inputNilai").value
+  }
+  const li = document.createElement("li")
+  li.classList.add("item-siswa")
+  li.textContent = `${nilaiSiswa.nama} - ${nilaiSiswa.nilai}`
+  if(nilaiSiswa.nilai >= 60){
+    li.classList.add("lulus")
+  }else if(nilaiSiswa.nilai < 60){
+    li.classList.add("gagal")
+  }
+  const btnHapus = document.createElement("button")
+  btnHapus.textContent = "hapus"
+  btnHapus.style.margin = "12px"
+  btnHapus.onclick = () => li.remove()
+  li.appendChild(btnHapus)
+
+  const inputs = document.querySelectorAll("input")
+  inputs.forEach(element => {
+    element.value = ""
+  })
+  
+  daftarSiswa.appendChild(li)
+}
+
+btnTambah.onclick = tambahDaftar
+
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .kartu-catatan {
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px 0;
+      width: 250px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .panjang {
+      color: blue;
+      font-size: 12px;
+    }
+    .btn-hapus {
+      color: red;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Catatan Harian</h2>
+  <input id="inputJudul" type="text" placeholder="Judul catatan..." />
+  <textarea id="inputIsi" placeholder="Isi catatan..."></textarea>
+  <button id="btnSimpan">Simpan</button>
+
+  <p id="counter">Total Catatan: 0</p>
+  <div id="kontainerCatatan"></div>
+
+</body>
+<script>
+
+  // Kerjakan sendiri! Tidak ada hint kali ini 💪
+  const btnSimpan = document.getElementById("btnSimpan")
+  const kontainer = document.getElementById("kontainerCatatan")
+  const total = document.getElementById("counter")
+
+  const catatan = []
+
+  const tambahCatatan = () => {
+    const catatanHarian = {
+      id: Date.now(),
+      judul:document.getElementById("inputJudul").value,
+      isi:document.getElementById("inputIsi").value
+    }
+    const p = document.createElement("p")
+    p.classList.add("kartu-catatan")
+    p.innerHTML = `Judul: ${catatanHarian.judul} <br> Isi: ${catatanHarian.isi} <br>`
+    catatan.push(catatanHarian)
+    total.textContent = `Total Catatan: ${catatan.length}`      
+    if(catatanHarian.isi.length > 50){
+      const labelPanjang = document.createElement("span")
+      labelPanjang.innerHTML = "Catatan Panjang <br>"
+      labelPanjang.classList.add("panjang")
+      p.appendChild(labelPanjang)
+    }
+    const btnHapus = document.createElement("button")
+    btnHapus.textContent = "Hapus"
+    btnHapus.classList.add("btn-hapus")
+    p.appendChild(btnHapus)
+    btnHapus.onclick = () => {
+      const i = catatan.findIndex(item => item.id === catatanHarian.id)
+      catatan.splice(i, 1)
+      p.remove()
+      total.textContent = `Total Catatan: ${catatan.length}`      
+
+    } 
+    kontainer.appendChild(p)
+   const inputs = document.querySelectorAll('#inputJudul, #inputIsi') 
+    inputs.forEach(input => {
+      input.value = ""      
+    });
+  }
+
+  btnSimpan.onclick = tambahCatatan
+
+</script>
+</html>

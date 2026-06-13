@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .item-produk {
+      margin: 5px 0;
+    }
+    .btn-hapus {
+      color: red;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    #total {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Keranjang Belanja</h2>
+  <input id="inputProduk" type="text" placeholder="Nama produk..." />
+  <input id="inputHarga" type="number" placeholder="Harga..." />
+  <button id="btnTambah">Tambah</button>
+
+  <ul id="daftarProduk"></ul>
+  <p id="total">Total: Rp 0</p>
+
+</body>
+<script>
+
+  // Kerjakan di sini tanpa GPT! 💪
+  // Hint: simpan semua harga dalam array
+  // setiap tambah → push harga ke array
+  // setiap hapus → splice harga dari array
+  // hitung total dengan reduce
+
+  const btnTambah = document.getElementById("btnTambah")
+  const daftarProduk = document.getElementById("daftarProduk")
+  const total = document.getElementById("total")
+
+  const daftarBelanja = []
+
+  const keranjangBelanja = () => {
+    const produk = {
+      id: Date.now(),
+      namaProduk:document.getElementById("inputProduk").value,
+      hargaProduk:document.getElementById("inputHarga").value
+    }
+    const li = document.createElement("li")
+    li.classList.add("item-produk")
+    li.textContent = `${produk.namaProduk} - ${produk.hargaProduk} `
+    daftarBelanja.push(produk)
+
+    const btnHapus = document.createElement("button")
+    btnHapus.classList.add("btn-hapus")
+    btnHapus.textContent = "Hapus"
+    btnHapus.onclick = () => {
+      const i = daftarBelanja.findIndex(item => item.id === produk.id)
+      daftarBelanja.splice(i, 1)
+      li.remove()
+      updateTotal()
+    }
+    li.appendChild(btnHapus)
+    const inputs = document.querySelectorAll("input")
+    inputs.forEach(p => {
+      p.value = ""      
+    });
+    updateTotal(7)
+    daftarProduk.appendChild(li)
+}
+
+const updateTotal = () => {
+  const totalBelanja = daftarBelanja.reduce((acc, item)=>{
+        return acc + Number(item.hargaProduk)
+    },0)
+    
+  total.textContent = `Total: Rp ${totalBelanja}`
+}
+btnTambah.onclick = keranjangBelanja
+
+</script>
+</html>
