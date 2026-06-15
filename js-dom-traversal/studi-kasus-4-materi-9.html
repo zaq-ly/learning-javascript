@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Keranjang Belanja</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 450px;
+      margin: 40px auto;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #f0f0f0;
+      border-radius: 6px;
+    }
+
+    .nama {
+      flex: 1;
+    }
+
+    .harga {
+      margin: 0 12px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .qty-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qty {
+      width: 24px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    button {
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+    }
+
+    .hapus {
+      background: #e74c3c;
+      margin-left: 10px;
+    }
+
+    #total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 16px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛒 Keranjang Belanja</h2>
+
+  <div id="keranjang">
+    <div class="item" data-harga="5000">
+      <span class="nama">Indomie</span>
+      <span class="harga">Rp 5.000</span>
+      <div class="qty-group">
+        <button class="kurang">-</button>
+        <span class="qty">1</span>
+        <button class="tambah">+</button>
+      </div>
+      <button class="hapus">Hapus</button>
+    </div>
+
+    <div class="item" data-harga="8000">
+      <span class="nama">Teh Botol</span>
+      <span class="harga">Rp 8.000</span>
+      <div class="qty-group">
+        <button class="kurang">-</button>
+        <span class="qty">1</span>
+        <button class="tambah">+</button>
+      </div>
+      <button class="hapus">Hapus</button>
+    </div>
+
+    <div class="item" data-harga="25000">
+      <span class="nama">Sabun Mandi</span>
+      <span class="harga">Rp 25.000</span>
+      <div class="qty-group">
+        <button class="kurang">-</button>
+        <span class="qty">1</span>
+        <button class="tambah">+</button>
+      </div>
+      <button class="hapus">Hapus</button>
+    </div>
+  </div>
+
+  <div id="total">Total: Rp 0</div>
+
+  <script>
+    // Tugasmu di sini
+    // 1. Tombol "+" → tambah qty, update total
+    // 2. Tombol "-" → kurangi qty (minimal 1), update total
+    // 3. Tombol "Hapus" → hapus item, update total
+    // 4. Fungsi hitungTotal → loop semua item, ambil harga & qty, jumlahkan
+     const hitungTotal = () => {
+        let total = 0
+        document.querySelectorAll(".item").forEach(item => {
+            let qty = parseInt(item.querySelector(".qty").textContent)
+            let harga = item.dataset.harga
+            total = total + (qty * harga)
+        });
+        document.getElementById("total").textContent = `Total: Rp ${total}`
+    }
+
+    document.querySelectorAll(".tambah").forEach(buttonTambah => {
+        buttonTambah.addEventListener("click", (e)=>{
+            let qtyGroup = e.target.parentElement
+            let qty = qtyGroup.querySelector(".qty")
+            let totalQty = parseInt(qty.textContent)
+            qty.textContent = totalQty + 1
+            hitungTotal()
+        })
+    });
+    document.querySelectorAll(".kurang").forEach(buttonKurang => {
+        buttonKurang.addEventListener("click", (e)=>{
+            let qtyGroup = e.target.parentElement
+            let qty = qtyGroup.querySelector(".qty")
+            let totalQty = parseInt(qty.textContent)
+            if(totalQty === 1) return
+            qty.textContent = totalQty - 1 
+            hitungTotal()
+        })
+    });
+    document.querySelectorAll(".hapus").forEach(tombolHapus => {
+        tombolHapus.addEventListener("click",(e)=>{
+            let item = e.target.parentElement
+            item.remove()
+            hitungTotal()
+        })
+    });
+
+    hitungTotal()
+
+
+
+  </script>
+
+</body>
+</html>

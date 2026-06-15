@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Highlight Item</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    li {
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .aktif {
+      background: #2ecc71;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Pilih Item</h2>
+  <ul id="list">
+    <li>Beli susu</li>
+    <li>Cuci baju</li>
+    <li>Belajar JS</li>
+  </ul>
+
+  <script>
+    // Tugasmu di sini
+    // 1. Ambil semua <li>
+    // 2. Pasang event listener di setiap <li>
+    // 3. Ketika diklik, tambah class "aktif" ke <li> itu
+    // 4. Hapus class "aktif" dari <li> lain yang mungkin aktif
+
+
+    const semuaLi = document.querySelectorAll("li")
+
+    semuaLi.forEach(item => {
+        item.addEventListener("click", (e)=>{
+            semuaLi.forEach(li => {
+                li.classList.remove("aktif")
+            });
+            
+            item.classList.add("aktif")
+        })        
+    });
+  </script>
+
+</body>
+</html>

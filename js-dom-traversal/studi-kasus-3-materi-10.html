@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do Navigasi</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      list-style: none;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    button {
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 To-Do Navigasi</h2>
+  <ul id="list">
+    <li>
+      Beli susu
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </li>
+    <li>
+      Cuci baju
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </li>
+    <li>
+      Belajar JS
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </li>
+    <li>
+      Makan siang
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </li>
+  </ul>
+
+  <script>
+    // Tugasmu di sini
+    // 1. Ambil semua tombol .naik dan .turun
+    // 2. Tombol .naik diklik → pindahkan <li> ke atas
+    // 3. Tombol .turun diklik → pindahkan <li> ke bawah
+    // 4. Cek apakah sudah di posisi paling atas/bawah
+
+    const buttonNaik = document.querySelectorAll(".naik")
+    const buttonTurun = document.querySelectorAll(".turun")
+
+    buttonNaik.forEach(buttonnaik => {
+      buttonnaik.addEventListener("click", (e)=>{
+        let li = e.target.parentElement.parentElement
+        let atasnya = li.previousElementSibling
+        let parent = li.parentElement
+        if(atasnya === null){
+          return
+        }
+        parent.insertBefore(li, atasnya)
+      })
+    });
+    buttonTurun.forEach(buttonturun => {
+      buttonturun.addEventListener("click", (e)=>{
+        let li = e.target.parentElement.parentElement
+        let bawahnya = li.nextElementSibling
+        let parent = li.parentElement
+        if(bawahnya === null){
+          return
+        }
+        parent.insertBefore(li, bawahnya.nextElementSibling)
+      })
+    });
+    
+
+  </script>
+
+</body>
+</html>

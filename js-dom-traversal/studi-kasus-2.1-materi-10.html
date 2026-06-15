@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tab Menu</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .tab.aktif {
+      background: #3498db;
+      color: white;
+    }
+
+    .konten {
+      display: none;
+      padding: 16px;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+
+    .konten.aktif {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📌 Tab Menu</h2>
+
+  <div class="tab-container">
+    <div class="tab aktif" data-target="beranda">Beranda</div>
+    <div class="tab" data-target="profil">Profil</div>
+    <div class="tab" data-target="kontak">Kontak</div>
+  </div>
+
+  <div id="beranda" class="konten aktif">Selamat datang di Beranda!</div>
+  <div id="profil" class="konten">Ini halaman Profil.</div>
+  <div id="kontak" class="konten">Hubungi kami di sini.</div>
+
+  <script>
+    // Tugasmu di sini
+    // 1. Ambil semua elemen .tab
+    // 2. Ambil semua elemen .konten
+    // 3. Ketika tab diklik:
+    //    - Hapus class "aktif" dari semua tab
+    //    - Hapus class "aktif" dari semua konten
+    //    - Tambah class "aktif" ke tab yang diklik
+    //    - Tampilkan konten yang sesuai dengan tab yang diklik
+
+
+    const semuaTab = document.querySelectorAll(".tab")
+    const semuaKonten = document.querySelectorAll(".konten")
+
+    semuaTab.forEach(tab => {
+      tab.addEventListener("click", (e)=>{
+        semuaTab.forEach(item => {
+          item.classList.remove("aktif")
+        });
+        semuaKonten.forEach(konten => {
+          konten.classList.remove("aktif")
+        });
+        tab.classList.add("aktif")
+        const aktif = document.getElementById(tab.dataset.target )
+        aktif.classList.add("aktif")
+      })      
+    });    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Antrian Pasien</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    .pasien {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #f0f0f0;
+      border-radius: 6px;
+    }
+
+    .nomor {
+      font-weight: bold;
+      color: #3498db;
+      margin-right: 10px;
+    }
+
+    .nama {
+      flex: 1;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    button {
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🏥 Antrian Pasien</h2>
+  <div id="antrian">
+    <div class="pasien">
+      <span class="nomor">1</span>
+      <span class="nama">Budi</span>
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </div>
+    <div class="pasien">
+      <span class="nomor">2</span>
+      <span class="nama">Sari</span>
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </div>
+    <div class="pasien">
+      <span class="nomor">3</span>
+      <span class="nama">Andi</span>
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </div>
+    <div class="pasien">
+      <span class="nomor">4</span>
+      <span class="nama">Dewi</span>
+      <div class="btn-group">
+        <button class="naik">⬆️</button>
+        <button class="turun">⬇️</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tugasmu di sini
+    // Sama seperti studi kasus 3, tapi kali ini pakai <div> bukan <li>
+    // Logika naik dan turun tetap sama
+
+
+    const tombolNaik = document.querySelectorAll(".naik")
+    const tombolTurun = document.querySelectorAll(".turun")
+
+    tombolNaik.forEach(tombolnaik => {
+        tombolnaik.addEventListener("click", (e) =>{
+            let pasien = e.target.parentElement.parentElement
+            let atasnya = pasien.previousElementSibling
+            let parent = pasien.parentElement
+            if(atasnya === null) return
+            parent.insertBefore(pasien, atasnya)
+        })
+    });
+    tombolTurun.forEach(tombolturun => {
+        tombolturun.addEventListener("click", (e) =>{
+            let pasien = e.target.parentElement.parentElement
+            let bawahnya = pasien.nextElementSibling
+            let parent = pasien.parentElement
+            if(bawahnya === null) return
+            parent.insertBefore(pasien, bawahnya.nextElementSibling)
+        })
+    });
+    
+  </script>
+
+</body>
+</html>
