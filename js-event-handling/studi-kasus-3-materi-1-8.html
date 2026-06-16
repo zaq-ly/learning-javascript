@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>Cari Nama</h2>
+  <input id="inputCari" type="text" placeholder="Cari nama..." />
+
+  <ul id="daftarNama"></ul>
+
+</body>
+<script>
+
+  const nama = ["Zaqly", "Budi", "Ani", "Siti", "Reza", "Dian", "Andi", "Rina"]
+
+  // Kerjakan sendiri! 💪
+
+  const inputCari = document.getElementById("inputCari")
+  const daftarNama = document.getElementById("daftarNama")
+
+
+  const tampilkanNama = () =>{
+      daftarNama.innerHTML = ""
+      const keyword = inputCari.value.toLowerCase()
+      const cariNama = nama.filter(cN => cN.toLowerCase().includes(keyword))
+    for(const itemNama of cariNama){
+            const li = document.createElement("li")
+            li.textContent = itemNama
+            daftarNama.appendChild(li)
+    }
+    if(cariNama.length === 0){
+        daftarNama.innerHTML = "Maaf, nama tidak ditemukan! 🔍"
+    }
+  }
+  
+
+  inputCari.addEventListener("input",tampilkanNama)
+  tampilkanNama()
+  
+
+</script>
+</html>

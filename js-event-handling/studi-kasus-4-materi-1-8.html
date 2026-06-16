@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .dilike { 
+      background-color: red; 
+      color: white; 
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Postingan Keren</h2>
+  <p>Ini adalah postingan yang sangat keren!</p>
+  <button id="btnLike">❤️ Like</button>
+  <p id="jumlahLike">0 Likes</p>
+
+</body>
+<script>
+
+  // Kerjakan sendiri! 💪
+
+  const btnLike = document.getElementById("btnLike")
+  const jumlahLike = document.getElementById("jumlahLike")
+
+
+
+  btnLike.addEventListener("click", () =>{    
+    btnLike.classList.toggle("dilike")
+    if(jumlahLike.textContent === "0 Likes"){
+        jumlahLike.textContent = "1 Likes"
+    }else{
+        jumlahLike.textContent = "0 Likes"
+    }
+  })
+
+
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>Kalkulator</h2>
+  <input id="angka1" type="number" placeholder="Angka 1..." />
+  <input id="angka2" type="number" placeholder="Angka 2..." />
+
+  <select id="operasi">
+    <option value="tambah">Tambah</option>
+    <option value="kurang">Kurang</option>
+    <option value="kali">Kali</option>
+    <option value="bagi">Bagi</option>
+  </select>
+
+  <button id="btnHitung">Hitung</button>
+  <p id="hasil">Hasil: </p>
+
+</body>
+<script>
+
+  // Kerjakan sendiri tanpa GPT! 💪
+  // Hint: select itu sama seperti input, valuenya bisa diambil pakai .value
+   
+  const btnHitung = document.getElementById("btnHitung")
+  const hasil = document.getElementById("hasil")
+
+btnHitung.addEventListener("click", () => {
+  const angka1 = Number(document.getElementById("angka1").value)
+  const angka2 = Number(document.getElementById("angka2").value)
+  const operasi = document.getElementById("operasi").value
+
+  let hasilHitung = 0
+
+  if(operasi === "tambah"){
+    hasilHitung = angka1 + angka2
+  }else if(operasi === "kurang"){
+    hasilHitung = angka1 - angka2
+  }else if(operasi === "kali"){
+    hasilHitung = angka1 * angka2
+  }else if (operasi === "bagi"){
+    hasilHitung = angka1 / angka2
+  }
+
+  hasil.textContent = `Hasil: ${hasilHitung}`
+})
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .lemah { color: red; }
+    .kuat { color: green; }
+  </style>
+</head>
+<body>
+
+  <h2>Cek Password</h2>
+  <input id="inputPassword" type="password" placeholder="Ketik password..." />
+  <button id="btnShow">Show</button>
+  <p id="status"></p>
+
+</body>
+<script>
+
+  // Kerjakan sendiri tanpa GPT! 💪
+
+  const btnShow = document.getElementById("btnShow")
+  const inputPassword = document.getElementById("inputPassword")
+  const status = document.getElementById("status")
+  
+  inputPassword.addEventListener("input", () => {
+    
+    if(inputPassword.value.length < 8){
+      status.textContent = "password terlalu pendek"
+      status.classList.add("lemah")
+      status.classList.remove("kuat")
+
+    }else{
+      status.textContent = "password kuat"
+      status.classList.add("kuat")
+      status.classList.remove("lemah")
+    }
+  })
+  btnShow.addEventListener("click", () =>{
+    if(inputPassword.type === "password"){
+      inputPassword.type = "text"
+      btnShow.textContent = "Hide"
+    }else{
+      inputPassword.type = "password"
+      btnShow.textContent = "Show"  
+    }
+  })
+
+
+</script>
+</html>

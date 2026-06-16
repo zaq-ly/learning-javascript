@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <input id="inputNama" type="text" placeholder="Ketik namamu..." />
+  <button id="btnSapa">Sapa</button>
+  <p id="hasil"></p>
+
+</body>
+<script>
+
+  // Tantangan 1 - pakai addEventListener untuk tombol btnSapa
+  // kalau diklik, tampilkan "Halo, [nama]!" ke elemen hasil
+
+  // Tantangan 2 - pakai addEventListener untuk inputNama
+  // setiap huruf diketik, tampilkan isi input ke elemen hasil secara realtime
+
+
+  const inputNama = document.getElementById("inputNama")
+  const btnSapa = document.getElementById("btnSapa")
+  const hasil = document.getElementById("hasil")
+
+  btnSapa.addEventListener("click", () => {
+    hasil.textContent = `Halo!, ${inputNama.value}` 
+  })
+
+  inputNama.addEventListener("input", () =>{
+    hasil.textContent = inputNama.value
+  })
+
+</script>
+</html>
