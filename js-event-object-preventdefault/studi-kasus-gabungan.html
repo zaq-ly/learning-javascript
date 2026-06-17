@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Interactive Card</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        .form-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus { border-color: #4f46e5; }
+
+        .btn-submit {
+            padding: 8px 16px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover { background: #4338ca; }
+
+        #pesanNama {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 20px;
+        }
+
+        .error { color: #e53e3e; }
+        .sukses { color: #38a169; }
+
+        .aksi-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .aksi-wrapper button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        #btnSuka    { background: #e53e3e; }
+        #btnSimpan  { background: #d69e2e; }
+        #btnBagikan { background: #38a169; }
+
+        #pesanAksi {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4f46e5;
+            min-height: 20px;
+        }
+
+        #kotakInfo {
+            height: 80px;
+            background: #4f46e5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #kotakInfo.hover { background: #e53e3e; }
+
+        #pesanMouse {
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        #pesanEscape {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Mini Interactive Card</h2>
+
+        <!-- Form -->
+        <form id="formNama" class="form-group">
+            <input type="text" id="inputNama" placeholder="Masukkan namamu...">
+            <button type="submit" class="btn-submit">Kirim</button>
+        </form>
+        <p id="pesanNama"></p>
+
+        <!-- Tombol Aksi -->
+        <div class="aksi-wrapper">
+            <button id="btnSuka">Suka</button>
+            <button id="btnSimpan">Simpan</button>
+            <button id="btnBagikan">Bagikan</button>
+        </div>
+        <p id="pesanAksi"></p>
+
+        <!-- Kotak Info -->
+        <div id="kotakInfo">
+            <p id="pesanMouse">Hover di sini!</p>
+        </div>
+
+        <p id="pesanEscape">Tekan Escape untuk reset semua pesan</p>
+    </div>
+
+    <script>
+        // kerjakan di sini
+        const formNama = document.getElementById("formNama")
+        const pesanNama = document.getElementById("pesanNama")
+        const inputNama = document.getElementById("inputNama")
+
+        formNama.addEventListener("submit", (e)=>{
+            e.preventDefault()
+            if(inputNama.value === ""){
+                pesanNama.textContent = "Nama tidak boleh kosong!"
+                pesanNama.classList.add("error")
+                pesanNama.classList.remove("sukses")
+            }else{
+                pesanNama.textContent = `Halo, ${inputNama.value}`
+                pesanNama.classList.add("sukses")
+                pesanNama.classList.remove("error")
+            }
+        })
+
+        const aksiWrapper = document.querySelector(".aksi-wrapper")
+        const pesanAksi = document.getElementById("pesanAksi")
+
+        aksiWrapper.addEventListener("click", (e)=>{
+            if(e.target.tagName === "BUTTON"){
+                pesanAksi.textContent = `Kamu memilih: ${e.target.innerText}`
+            }
+        })
+        
+        const kotakInfo = document.getElementById("kotakInfo")
+        const pesanMouse = document.getElementById("pesanMouse")
+
+        const hoverKotak = (e) =>{
+            if(e.type === "mouseenter" || e.type === "mousemove" ){
+                pesanMouse.textContent = `X:${e.clientX} | Y:${e.clientY}`
+                kotakInfo.classList.add("hover")
+            }else{
+                kotakInfo.classList.remove("hover")
+                pesanMouse.textContent = "Hover di sini!"
+            }
+        }
+
+        kotakInfo.addEventListener("mouseenter", hoverKotak)
+        kotakInfo.addEventListener("mouseleave", hoverKotak)
+        kotakInfo.addEventListener("mousemove", hoverKotak)
+
+        document.addEventListener("keydown", (e)=>{
+            if(e.key === "Escape"){
+                pesanNama.textContent = ""
+                pesanAksi.textContent = ""
+                pesanMouse.textContent = "Hover di sini!"
+                pesanNama.className = ""
+                inputNama.value = ""
+            }
+        })
+        
+
+    </script>
+
+</body>
+</html>

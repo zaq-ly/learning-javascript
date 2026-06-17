@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>preventDefault Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 1rem;
+        }
+
+        a {
+            font-size: 18px;
+            color: #4f46e5;
+        }
+
+        #pesan {
+            font-size: 15px;
+            font-weight: bold;
+            color: #e53e3e;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://google.com" id="linkGoogle">Pergi ke Google</a>
+    <p id="pesan"></p>
+
+    <script>
+        const linkGoogle = document.getElementById("linkGoogle")
+        const pesan = document.getElementById("pesan")
+
+        linkGoogle.addEventListener("click", (e)=>{
+            e.preventDefault()
+            pesan.textContent = "Link dicegah! Kamu tetap di sini."
+        })
+    </script>
+</body>
+</html>

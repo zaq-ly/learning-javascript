@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>event.target</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 1.5rem;
+        }
+
+        .wrapper {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #btnMerah { background: #e53e3e; }
+        #btnHijau { background: #38a169; }
+        #btnBiru  { background: #4f46e5; }
+
+        #pesan {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Klik salah satu tombol:</p>
+    <div class="wrapper">
+        <button id="btnMerah">Merah</button>
+        <button id="btnHijau">Hijau</button>
+        <button id="btnBiru">Biru</button>
+    </div>
+    <p id="pesan"></p>
+
+    <script>
+        // kerjakan di sini
+        const wrapper = document.querySelector(".wrapper")
+        const pesan = document.getElementById("pesan")
+
+        wrapper.addEventListener("click", (e)=>{
+            
+            if (e.target.tagName === "BUTTON") {
+                pesan.textContent = `Kamu mengklik ${e.target.innerText}`
+            }
+        })
+
+    </script>
+
+</body>
+</html>
