@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .komentar {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      button {
+        background: red;
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Komentar</h2>
+    <div id="komentarList">
+      <div class="komentar">
+        <span>Mantap materinya! 👍</span>
+        <button data-action="hapus">Hapus</button>
+      </div>
+      <div class="komentar">
+        <span>Penjelasannya sangat jelas!</span>
+        <button data-action="hapus">Hapus</button>
+      </div>
+      <div class="komentar">
+        <span>Boleh minta studi kasus tambahan?</span>
+        <button data-action="hapus">Hapus</button>
+      </div>
+    </div>
+
+    <script>
+      // Tuliskan kode kamu di sini
+    const komentarList = document.getElementById("komentarList")
+
+    komentarList.addEventListener("click",(e)=>{
+        if(e.target.dataset.action === "hapus"){
+            const itemKomen = e.target.parentElement
+            itemKomen.remove()
+        }
+    })
+    </script>
+  </body>
+</html>

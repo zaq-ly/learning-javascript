@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body { font-family: sans-serif; max-width: 500px; margin: 40px auto; }
+      input { padding: 8px; width: 70%; }
+      #btnTambah { padding: 8px 16px; cursor: pointer; }
+      ul { list-style: none; padding: 0; }
+      li { display: flex; justify-content: space-between; align-items: center;
+           padding: 10px; border: 1px solid #ddd; margin: 6px 0; border-radius: 6px; }
+      .selesai { text-decoration: line-through; color: #aaa; }
+      button { padding: 4px 10px; cursor: pointer; margin-left: 4px; }
+    </style>
+  </head>
+  <body>
+    <h2>📝 To-Do List</h2>
+    <input id="inputTugas" type="text" placeholder="Tulis tugas baru..." />
+    <button id="btnTambah">Tambah</button>
+    <ul id="todoList"></ul>
+
+    <script>
+      // Tuliskan kode kamu di sini
+      const tambah = document.getElementById("btnTambah")
+      const inputTugas = document.getElementById("inputTugas")
+      const todoList = document.getElementById("todoList")
+
+      tambah.addEventListener("click", (e)=>{
+        const li = document.createElement("li")
+        li.classList.add("li")
+        const span = document.createElement("span")
+        span.textContent = inputTugas.value
+        li.appendChild(span)
+        const btnSelesai = document.createElement("button")
+        btnSelesai.dataset.action = "selesai"
+        btnSelesai.textContent = "Selesai"
+        li.appendChild(btnSelesai)
+        const btnHapus = document.createElement("button")
+        btnHapus.dataset.action = "hapus"
+        btnHapus.textContent = "Hapus"
+        li.appendChild(btnHapus)
+        todoList.appendChild(li)
+       inputTugas.value = ""
+      })
+
+      todoList.addEventListener("click", (e)=>{
+            if(e.target.dataset.action === "selesai"){
+              let list = e.target.previousElementSibling
+              list.classList.add("selesai")
+            }else if(e.target.dataset.action === "hapus"){
+              let li = e.target.parentElement
+              li.remove()
+            }
+        })
+
+
+    </script>
+  </body>
+</html>

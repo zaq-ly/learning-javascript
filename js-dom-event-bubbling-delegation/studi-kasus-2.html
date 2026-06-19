@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+      th { background: #f5f5f5; }
+      button { padding: 4px 10px; cursor: pointer; margin: 0 2px; }
+      .btn-hapus { background: #e74c3c; color: white; border: none; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h2>🛒 Keranjang Belanja</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Produk</th>
+          <th>Jumlah</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="cartBody">
+        <tr>
+          <td>Sepatu Running</td>
+          <td class="jumlah">1</td>
+          <td>
+            <button data-action="tambah">+</button>
+            <button data-action="kurang">-</button>
+            <button data-action="hapus" class="btn-hapus">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Kaos Polos</td>
+          <td class="jumlah">1</td>
+          <td>
+            <button data-action="tambah">+</button>
+            <button data-action="kurang">-</button>
+            <button data-action="hapus" class="btn-hapus">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Topi Bucket</td>
+          <td class="jumlah">1</td>
+          <td>
+            <button data-action="tambah">+</button>
+            <button data-action="kurang">-</button>
+            <button data-action="hapus" class="btn-hapus">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      // Tuliskan kode kamu di sini
+      const cartBody = document.getElementById("cartBody")
+
+      
+      cartBody.addEventListener("click", (e)=>{
+        if(e.target.dataset.action === "tambah"){
+            let jumlah = e.target.parentElement.previousElementSibling
+            let total = Number(jumlah.textContent)
+            jumlah.textContent = total + 1
+        }else if(e.target.dataset.action === "kurang"){
+            let jumlah = e.target.parentElement.previousElementSibling
+            let total = Number(jumlah.textContent)
+            if(total === 1) return
+            jumlah.textContent = total - 1
+        }else if(e.target.dataset.action === "hapus"){
+            let hapus = e.target.parentElement.parentElement
+            hapus.remove()
+        }
+      })
+    </script>
+  </body>
+</html>
