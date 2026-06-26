@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simpan Nama</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        #pesan {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Siapa namamu?</h2>
+    <input type="text" id="inputNama" placeholder="Ketik namamu...">
+    <button id="btnSimpan">Simpan</button>
+    <button id="btnHapus">Hapus</button>
+    <p id="pesan"></p>
+
+    <script>
+        // 🎯 TUGASMU DI SINI:
+
+        // 1. Saat halaman dimuat → cek apakah ada nama di localStorage
+        //    Kalau ada → tampilkan "Halo, [nama]!" di #pesan
+        //    Kalau tidak ada → tampilkan "Belum ada nama tersimpan."
+
+        // 2. Saat #btnSimpan diklik →
+        //    Ambil nilai dari #inputNama
+        //    Simpan ke localStorage dengan key 'nama'
+        //    Tampilkan "Halo, [nama]!" di #pesan
+
+        // 3. Saat #btnHapus diklik →
+        //    Hapus data 'nama' dari localStorage
+        //    Tampilkan "Nama berhasil dihapus." di #pesan
+
+        const btnSimpan = document.getElementById("btnSimpan")
+        const btnHapus = document.getElementById("btnHapus")
+        const pesan = document.getElementById("pesan")
+
+        btnSimpan.addEventListener("click", () => {
+            const inputNama = document.getElementById("inputNama").value
+            if (inputNama !== "") {
+                localStorage.setItem('nama', inputNama)
+                pesan.textContent = `Halo, ${inputNama}!`
+            } else {
+                pesan.textContent = "Mohon isi dengan benar!"
+            }
+
+        })
+
+        btnHapus.addEventListener("click", () => {
+            localStorage.removeItem('nama')
+            pesan.textContent = "Nama berhasil dihapus."
+        })
+
+        const nama = localStorage.getItem('nama')
+
+        if (nama) {
+            pesan.textContent = `Halo, ${nama}!`
+        } else {
+            pesan.textContent = "Belum ada nama tersimpan"
+        }
+
+
+    </script>
+
+</body>
+
+</html>

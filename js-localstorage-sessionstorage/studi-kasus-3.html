@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Notes App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        #listNotes {
+            margin-top: 24px;
+        }
+
+        .note-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .note-text {
+            flex: 1;
+            font-size: 15px;
+            white-space: pre-wrap;
+        }
+
+        .btn-hapus {
+            background: #ef4444;
+            padding: 6px 12px;
+            font-size: 13px;
+            margin-top: 0;
+            flex-shrink: 0;
+        }
+
+        .btn-hapus:hover {
+            background: #dc2626;
+        }
+
+        #pesan {
+            margin-top: 10px;
+            color: #ef4444;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>📝 Notes App</h2>
+    <textarea id="inputNote" placeholder="Tulis catatanmu..."></textarea>
+    <button id="btnTambah">Simpan Catatan</button>
+    <p id="pesan"></p>
+    <div id="listNotes"></div>
+
+    <script>
+
+        const btnTambah = document.getElementById("btnTambah")
+        const pesan = document.getElementById("pesan")
+        const listNotes = document.getElementById("listNotes")
+
+        let notes = JSON.parse(localStorage.getItem("notes")) || []
+
+        const renderNotes = () => {
+            listNotes.innerHTML = ""
+            notes.forEach(element => {
+                const cardNotes = document.createElement("div")
+                cardNotes.classList.add("note-card")
+                const cardText = document.createElement("div")
+                cardText.classList.add("note-text")
+                cardText.textContent = element.teks
+                const btnHapus = document.createElement("button")
+                btnHapus.classList.add("btn-hapus")
+                btnHapus.textContent = "Hapus"
+                btnHapus.addEventListener("click", () => {
+                    notes = notes.filter(h => h.id !== element.id)
+                    localStorage.setItem("notes", JSON.stringify(notes))
+                    renderNotes()
+                })
+
+
+                cardNotes.appendChild(cardText)
+                cardNotes.appendChild(btnHapus)
+                listNotes.appendChild(cardNotes)
+            });
+
+        }
+
+        btnTambah.addEventListener("click", () => {
+            const inputNote = document.getElementById("inputNote").value
+            if (inputNote !== "") {
+                const notesBaru = { id: Date.now(), teks: inputNote }
+                notes.push(notesBaru)
+                localStorage.setItem("notes", JSON.stringify(notes))
+                renderNotes()
+            } else {
+                pesan.textContent = "Maaf isi dengan benar!"
+            }
+        })
+
+        renderNotes()
+
+        // 🎯 TUGASMU DI SINI:
+
+        // 1. Saat halaman dimuat →
+        //    Ambil notes dari localStorage (key: 'notes')
+        //    Render semua catatan yang ada
+
+        // 2. Saat #btnTambah diklik →
+        //    Ambil teks dari #inputNote
+        //    Validasi: kalau kosong → tampilkan pesan di #pesan
+        //    Kalau tidak kosong → buat object note baru:
+        //      { id: Date.now(), teks: inputNote }
+        //    Push ke array notes → simpan ke localStorage → render ulang
+
+        // 3. Render function → renderNotes()
+        //    Tiap note tampil sebagai .note-card berisi:
+        //      - <div class="note-text"> isi teksnya
+        //      - <button class="btn-hapus"> bertulisan "Hapus"
+        //    Tombol Hapus → hapus note berdasarkan id dari array
+        //    Simpan ulang ke localStorage → render ulang
+
+        // 💡 HINT:
+        // Tiap note disimpan sebagai object → { id: Date.now(), teks: "..." }
+        // Untuk hapus per item → gunakan array.filter() berdasarkan id
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Cart</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        #btnKosongkan {
+            background: #ef4444;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        #btnKosongkan:hover {
+            background: #dc2626;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 10px 14px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        #jumlah {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🛒 Keranjang Belanja</h2>
+
+    <div class="input-group">
+        <input type="text" id="inputItem" placeholder="Nama produk...">
+        <button id="btnTambah">Tambah</button>
+    </div>
+
+    <ul id="listCart"></ul>
+    <p id="jumlah"></p>
+    <button id="btnKosongkan">Kosongkan Keranjang</button>
+
+    <script>
+        // 🎯 TUGASMU DI SINI:
+
+        // 1. Saat halaman dimuat →
+        //    Ambil data cart dari localStorage (key: 'cart')
+        //    Kalau ada → tampilkan semua item di #listCart
+        //    Tampilkan jumlah item di #jumlah → "Total: X item"
+
+        // 2. Saat #btnTambah diklik →
+        //    Ambil nilai dari #inputNama
+        //    Kalau kosong → tampilkan pesan "Mohon isi nama produk!"  di #jumlah
+        //    Kalau tidak kosong → tambahkan ke array cart
+        //    Simpan array cart ke localStorage (ingat: harus di-stringify dulu!)
+        //    Render ulang #listCart dan update #jumlah
+
+        // 3. Saat #btnKosongkan diklik →
+        //    Kosongkan array cart
+        //    Hapus dari localStorage
+        //    Kosongkan tampilan #listCart
+        //    Update #jumlah → "Total: 0 item"
+
+        // 💡 HINT STRUKTUR:
+        // Pisahkan logic render ke dalam function tersendiri → renderCart()
+        // supaya bisa dipanggil di beberapa tempat tanpa nulis ulang
+
+        const btnTambah = document.getElementById("btnTambah")
+        const listCart = document.getElementById("listCart")
+        const jumlah = document.getElementById("jumlah")
+        const btnKosongkan = document.getElementById("btnKosongkan")
+
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || []
+
+
+
+        const renderCart = () => {
+            listCart.innerHTML = ""
+            cart.forEach(element => {
+                const li = document.createElement("li")
+                li.classList.add("li")
+                li.textContent = element
+                listCart.appendChild(li)
+            });
+            jumlah.textContent = `Total: ${cart.length} Item`
+
+        }
+
+        btnTambah.addEventListener("click", () => {
+            const inputItem = document.getElementById("inputItem").value
+            if (inputItem !== "") {
+                cart.push(inputItem)
+                localStorage.setItem('cart', JSON.stringify(cart))
+                renderCart()
+            } else {
+                jumlah.textContent = "Mohon isi nama produk!"
+            }
+        })
+
+        btnKosongkan.addEventListener("click", () => {
+            cart.length = 0
+            localStorage.removeItem("cart")
+            renderCart()
+            jumlah.textContent = `Total: 0`
+        })
+        renderCart()
+    </script>
+
+</body>
+
+</html>

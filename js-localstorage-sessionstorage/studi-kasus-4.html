@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Multi-Step</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.aktif {
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        #ringkasan {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        #pesan {
+            color: #ef4444;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Step 1 -->
+    <div class="step aktif" id="step1">
+        <h2>Step 1 — Data Diri</h2>
+        <input type="text" id="inputNama" placeholder="Nama lengkap">
+        <input type="text" id="inputEmail" placeholder="Email">
+        <p id="pesan"></p>
+        <button id="btnLanjut">Lanjut →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="step2">
+        <h2>Step 2 — Konfirmasi</h2>
+        <div id="ringkasan"></div>
+        <button id="btnKembali">← Kembali</button>
+        <button id="btnKirim">Kirim</button>
+    </div>
+
+    <script>
+        // 🎯 TUGASMU DI SINI:
+
+        const btnLanjut = document.getElementById("btnLanjut")
+        const pesan = document.getElementById("pesan")
+        const ringkasan = document.getElementById("ringkasan")
+        const step1 = document.getElementById("step1")
+        const step2 = document.getElementById("step2")
+        const inputNama = document.getElementById("inputNama")
+        const inputEmail = document.getElementById("inputEmail")
+        btnLanjut.addEventListener("click", () => {
+            const nama = inputNama.value
+            const email = inputEmail.value
+            if (nama !== "" && email !== "") {
+                sessionStorage.setItem("nama", nama)
+                sessionStorage.setItem("email", email)
+                ringkasan.innerHTML = `Nama: ${sessionStorage.getItem("nama")} <br> Email: ${sessionStorage.getItem("email")} `
+                step1.classList.remove("aktif")
+                step2.classList.add("aktif")
+            } else {
+                pesan.textContent = "Maaf nama dan email tidak boleh kosong"
+            }
+        })
+
+        document.getElementById("btnKembali").addEventListener("click", () => {
+            step2.classList.remove("aktif")
+            step1.classList.add("aktif")
+            inputNama.value = sessionStorage.getItem("nama")
+            inputEmail.value = sessionStorage.getItem("email")
+        })
+
+        document.getElementById("btnKirim").addEventListener("click", () => {
+            alert("Data berhasil dikirim!")
+            sessionStorage.clear()
+            step2.classList.remove("aktif")
+            step1.classList.add("aktif")
+            inputNama.value = ""
+            inputEmail.value = ""
+        })
+
+
+
+
+        // 1. Saat #btnLanjut diklik →
+        //    Ambil nilai #inputNama dan #inputEmail
+        //    Validasi: kalau salah satu kosong → tampilkan pesan di #pesan
+        //    Kalau tidak kosong →
+        //      Simpan ke sessionStorage: key 'nama' dan key 'email'
+        //      Pindah ke step 2: sembunyikan #step1, tampilkan #step2
+        //      Tampilkan ringkasan di #ringkasan:
+        //        "Nama: [nama]"
+        //        "Email: [email]"
+
+        // 2. Saat #btnKembali diklik →
+        //    Sembunyikan #step2, tampilkan #step1
+        //    Isi kembali #inputNama dan #inputEmail dari sessionStorage
+
+        // 3. Saat #btnKirim diklik →
+        //    Tampilkan alert: "Data berhasil dikirim!"
+        //    Hapus semua data dari sessionStorage
+        //    Reset form → kembali ke step 1, input kosong
+    </script>
+
+</body>
+
+</html>

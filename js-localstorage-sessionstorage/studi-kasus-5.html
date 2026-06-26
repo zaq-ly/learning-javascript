@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrasi</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+        }
+
+        p.sub {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.aktif {
+            display: block;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+        }
+
+        .tombol-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        button.sekunder {
+            background: #6b7280;
+        }
+
+        button.sekunder:hover {
+            background: #4b5563;
+        }
+
+        #pesan {
+            color: #ef4444;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        #ringkasan {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 15px;
+            line-height: 2;
+            margin-bottom: 16px;
+        }
+
+        .sukses {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .sukses h2 {
+            color: #10b981;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Step 1 -->
+    <div class="step aktif" id="step1">
+        <h2>Step 1 — Akun</h2>
+        <p class="sub">1 dari 3</p>
+        <input type="text" id="inputUsername" placeholder="Username">
+        <input type="password" id="inputPassword" placeholder="Password">
+        <p id="pesan"></p>
+        <button id="btnStep1">Lanjut →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="step2">
+        <h2>Step 2 — Profil</h2>
+        <p class="sub">2 dari 3</p>
+        <input type="text" id="inputNama" placeholder="Nama lengkap">
+        <input type="text" id="inputKota" placeholder="Kota">
+        <p id="pesan2"></p>
+        <div class="tombol-group">
+            <button class="sekunder" id="btnBackStep2">← Kembali</button>
+            <button id="btnStep2">Lanjut →</button>
+        </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" id="step3">
+        <h2>Step 3 — Konfirmasi</h2>
+        <p class="sub">3 dari 3</p>
+        <div id="ringkasan"></div>
+        <div class="tombol-group">
+            <button class="sekunder" id="btnBackStep3">← Kembali</button>
+            <button id="btnDaftar">Daftar Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Step 4 — Sukses -->
+    <div class="step" id="step4">
+        <div class="sukses">
+            <h2>✅ Registrasi Berhasil!</h2>
+            <p id="pesanSukses"></p>
+        </div>
+    </div>
+
+    <script>
+
+        const inputUsername = document.getElementById("inputUsername")
+        const inputPassword = document.getElementById("inputPassword")
+        const inputNama = document.getElementById("inputNama")
+        const inputKota = document.getElementById("inputKota")
+        const btnStep1 = document.getElementById("btnStep1")
+        const step1 = document.getElementById("step1")
+        const step2 = document.getElementById("step2")
+        const step3 = document.getElementById("step3")
+        const btnStep2 = document.getElementById("btnStep2")
+        const btnStep3 = document.getElementById("btnStep3")
+        const btnBackStep2 = document.getElementById("btnBackStep2")
+        const btnBackStep3 = document.getElementById("btnBackStep3")
+
+        btnStep1.addEventListener("click", () => {
+            const username = inputUsername.value
+            const password = inputPassword.value
+
+            if (username !== "" && password !== "") {
+                sessionStorage.setItem("username", username)
+                sessionStorage.setItem("password", password)
+                step1.classList.remove("aktif")
+                step2.classList.add("aktif")
+            } else {
+                document.getElementById("pesan").textContent = "Maaf Username dan Password tidak boleh kosong!"
+            }
+
+        })
+
+        btnStep2.addEventListener("click", () => {
+            const nama = inputNama.value
+            const kota = inputKota.value
+            if (nama !== "" && kota !== "") {
+                sessionStorage.setItem("nama", nama)
+                sessionStorage.setItem("kota", kota)
+                document.getElementById("ringkasan").innerHTML = `Username : ${sessionStorage.getItem("username")} <br> Nama: ${sessionStorage.getItem("nama")} <br> Kota: ${sessionStorage.getItem("kota")}`
+                step2.classList.remove("aktif")
+                step3.classList.add("aktif")
+            } else {
+                document.getElementById("pesan2").textContent = "Maaf Nama dan Kota tidak boleh kosong!"
+            }
+        })
+
+        btnBackStep2.addEventListener("click", () => {
+            step2.classList.remove("aktif")
+            step1.classList.add("aktif")
+            inputUsername.value = sessionStorage.getItem("username")
+            inputPassword.value = sessionStorage.getItem("password")
+        })
+
+        btnBackStep3.addEventListener("click", () => {
+            step3.classList.remove("aktif")
+            step2.classList.add("aktif")
+            inputNama.value = sessionStorage.getItem("nama")
+            inputKota.value = sessionStorage.getItem("kota")
+        })
+
+        document.getElementById("btnDaftar").addEventListener("click", () => {
+            document.getElementById("step4").classList.add("aktif")
+            step3.classList.remove("aktif")
+            document.getElementById("pesanSukses").textContent = `Selamat Datang, ${sessionStorage.getItem("nama")}!`
+            sessionStorage.clear()
+
+        })
+
+
+
+
+
+
+        // 🎯 TUGASMU DI SINI:
+
+        // STEP 1 → STEP 2:
+        // Validasi username & password tidak kosong
+        // Simpan ke sessionStorage: 'username', 'password'
+        // Pindah ke step 2
+
+        // STEP 2 → STEP 3:
+        // Validasi nama & kota tidak kosong
+        // Simpan ke sessionStorage: 'nama', 'kota'
+        // Tampilkan ringkasan semua data di #ringkasan
+        // Pindah ke step 3
+
+        // BACK STEP 2 → STEP 1:
+        // Isi balik input dari sessionStorage
+        // Pindah ke step 1
+
+        // BACK STEP 3 → STEP 2:
+        // Isi balik input dari sessionStorage
+        // Pindah ke step 2
+
+        // DAFTAR:
+        // Tampilkan step 4
+        // Tampilkan "Selamat datang, [nama]!" di #pesanSukses
+        // Hapus semua sessionStorage
+    </script>
+
+</body>
+
+</html>
