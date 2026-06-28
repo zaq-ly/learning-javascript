@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Pemain</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #0f3460;
+        }
+
+        .label {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .value {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+
+        .rank {
+            color: #f90;
+        }
+
+        .kills {
+            color: #e44;
+        }
+
+        .win-rate {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="player-container"></div>
+
+    <script>
+        const players = [
+            {
+                username: "SnipeKing",
+                stats: {
+                    rank: "Diamond",
+                    kills: 2400,
+                    winRate: 0  // winRate 0% (bukan tidak ada!)
+                }
+            },
+            {
+                username: "NoobMaster",
+                stats: {
+                    rank: null,  // belum punya rank
+                    kills: 10
+                    // winRate tidak ada
+                }
+            },
+            {
+                username: "GhostPlayer"
+                // tidak ada stats sama sekali
+            }
+        ]
+
+        const container = document.getElementById("player-container")
+
+        players.forEach(player => {
+            const card = document.createElement("div")
+            card.classList.add("card")
+            container.appendChild(card)
+            const label = document.createElement("p")
+            label.classList.add("label")
+            label.textContent = player?.username
+            card.appendChild(label)
+            const value = document.createElement("div")
+            value.classList.add("value")
+            card.appendChild(value)
+            const rank = document.createElement("p")
+            rank.classList.add("rank")
+            rank.textContent = player?.stats?.rank ?? "Unranked"
+            value.appendChild(rank)
+            const kills = document.createElement("p")
+            kills.classList.add("kills")
+            kills.textContent = player?.stats?.kills ?? 0
+            value.appendChild(kills)
+            const winrate = document.createElement("p")
+            winrate.classList.add("win-rate")
+            winrate.textContent = player?.stats?.winRate !== undefined ? `${player?.stats?.winRate}%` : "N/A"
+            value.appendChild(winrate)
+
+        })
+        // TODO: Loop semua players, buat card untuk masing-masing.
+        // Tampilkan:
+        // - Username
+        // - Rank       → default: "Unranked"
+        // - Kills      → default: 0
+        // - Win Rate   → default: "N/A"
+        // Gunakan ?. DAN ?? bersamaan!
+        // Ingat: winRate 0% harus tetap tampil 0, bukan "N/A"!
+    </script>
+</body>
+
+</html>

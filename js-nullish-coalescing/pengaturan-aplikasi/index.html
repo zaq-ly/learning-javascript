@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pengaturan App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            margin: 8px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Pengaturan Aktif</h2>
+        <p><span class="label">Bahasa:</span> <span id="language"></span></p>
+        <p><span class="label">Tema:</span> <span id="theme"></span></p>
+        <p><span class="label">Ukuran Font:</span> <span id="font-size"></span></p>
+        <p><span class="label">Volume:</span> <span id="volume"></span></p>
+    </div>
+
+    <script>
+        const userSettings = {
+            language: "id",
+            theme: null,
+            fontSize: 0,
+            // volume tidak ada
+        }
+
+        // TODO: Tampilkan pengaturan aktif ke elemen HTML.
+        // Gunakan ?? untuk semua nilai dengan ketentuan default berikut:
+        // - language  → default: "en"
+        // - theme     → default: "light"
+        // - fontSize  → default: 14
+        // - volume    → default: 50
+
+        document.getElementById("language").textContent = userSettings?.language ?? "en"
+        document.getElementById("theme").textContent = userSettings?.theme ?? 'light'
+        document.getElementById("font-size").textContent = userSettings?.fontSize ?? 14
+        document.getElementById("volume").textContent = userSettings?.volume ?? 50 
+    </script>
+</body>
+
+</html>
