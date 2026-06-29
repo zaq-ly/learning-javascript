@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Profil User</h2>
+        <p><span class="label">Nama:</span> <span id="name"></span></p>
+        <p><span class="label">Kota:</span> <span id="city"></span></p>
+        <p><span class="label">Hobi pertama:</span> <span id="hobby"></span></p>
+        <p><span class="label">No. HP:</span> <span id="phone"></span></p>
+    </div>
+
+    <script>
+        const user = {
+            name: "Zaq",
+            address: {
+                city: "Makassar"
+            },
+            hobbies: ["coding", "gaming"]
+            // sengaja tidak ada contact
+        }
+
+        // TODO: Tampilkan data berikut ke elemen HTML yang sesuai.
+        // Gunakan optional chaining (?.) untuk semua akses data.
+        // Kalau datanya tidak ada, biarkan tampil "undefined" dulu.
+
+        document.getElementById("name").textContent = user.name
+        document.getElementById("city").textContent = user?.address?.city
+        document.getElementById("hobby").textContent = user?.hobbies?.[0]
+        document.getElementById("phone").textContent = user?.contact?.telephone
+    </script>
+</body>
+
+</html>

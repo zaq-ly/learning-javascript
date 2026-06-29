@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Toko Online</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0 0 8px;
+        }
+
+        .price {
+            color: #e44;
+            font-weight: bold;
+        }
+
+        .discount {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .review {
+            color: #f90;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+
+        .stock {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="product-container"></div>
+
+    <script>
+        const products = [
+            {
+                name: "Sepatu Lari",
+                price: 350000,
+                discount: {
+                    percent: 20,
+                    label: "Flash Sale"
+                },
+                review: {
+                    rating: 4.8,
+                    totalReviewer: 120
+                },
+                stock: {
+                    available: true
+                }
+            },
+            {
+                name: "Kaos Polos",
+                price: 85000,
+                // tidak ada discount
+                review: {
+                    rating: 4.2
+                    // tidak ada totalReviewer
+                },
+                stock: {
+                    available: false
+                }
+            },
+            {
+                name: "Topi Bucket",
+                price: 120000,
+                discount: {
+                    percent: 10,
+                    label: "Promo Akhir Bulan"
+                }
+                // tidak ada review, tidak ada stock
+            }
+        ]
+
+        const container = document.getElementById("product-container")
+
+        products.forEach(cardProduk => {
+            const card = document.createElement("div")
+            card.classList.add("product-card")
+            container.appendChild(card)
+            const name = document.createElement("h3")
+            name.textContent = cardProduk?.name
+            card.appendChild(name)
+            const price = document.createElement("p")
+            price.classList.add("price")
+            price.textContent = `Rp ${cardProduk?.price}`
+            card.appendChild(price)
+            const discount = document.createElement("p")
+            discount.classList.add("discount")
+            if (cardProduk?.discount?.label !== undefined && cardProduk?.discount?.percent !== undefined) {
+                discount.textContent = `${cardProduk?.discount?.label} ${cardProduk?.discount?.percent}%`
+            } else {
+                discount.textContent = "Tidak ada discount"
+            }
+
+            card.appendChild(discount)
+            const review = document.createElement("p")
+            review.classList.add("review")
+            if (cardProduk?.review?.totalReviewer !== undefined) {
+                review.textContent = `⭐ ${cardProduk?.review?.rating} (${cardProduk?.review?.totalReviewer} Reviewer)`
+            } else {
+                review.textContent = `⭐ ${cardProduk?.review?.rating} (? Reviewer)`
+            }
+            card.appendChild(review)
+            const stock = document.createElement("p")
+            stock.classList.add("stock")
+            if (cardProduk?.stock?.available === true) {
+                stock.textContent = "Tersedia"
+            } else if (cardProduk?.stock?.available === false) {
+                stock.textContent = "Habis"
+            } else {
+                stock.textContent = "Tidak diketahui"
+            }
+            card.appendChild(stock)
+        });
+
+        // TODO: Loop semua products, buat card untuk masing-masing.
+        // Setiap card tampilkan:
+        // - Nama produk
+        // - Harga
+        // - Label diskon (kalau ada) — contoh: "Flash Sale 20%"
+        // - Rating & total reviewer — contoh: "⭐ 4.8 (120 reviews)"
+        //   kalau totalReviewer tidak ada, tampilkan "⭐ 4.2 (? reviews)"
+        // - Status stok — "Tersedia" kalau available true, "Habis" kalau false,
+        //   "Tidak diketahui" kalau stock tidak ada sama sekali
+        // Gunakan ?. untuk semua akses data yang mungkin tidak ada!
+    </script>
+</body>
+
+</html>
