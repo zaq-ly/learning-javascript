@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Finder</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            background: #0d1117;
+            color: white;
+        }
+
+        .container {
+            width: 400px;
+        }
+
+        h2 {
+            color: #58a6ff;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            background: #161b22;
+            color: white;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .kartu {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            display: none;
+        }
+
+        .kartu img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .kartu h3 {
+            margin: 10px 0 4px;
+            color: #58a6ff;
+        }
+
+        .kartu p {
+            margin: 4px 0;
+            color: #8b949e;
+            font-size: 14px;
+        }
+
+        .riwayat {
+            margin-top: 24px;
+        }
+
+        .riwayat h4 {
+            color: #8b949e;
+            margin-bottom: 8px;
+        }
+
+        .riwayat span {
+            display: inline-block;
+            background: #21262d;
+            border: 1px solid #30363d;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #58a6ff;
+        }
+
+        #error {
+            color: #f85149;
+            margin-bottom: 12px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>🔍 GitHub Finder</h2>
+        <div class="search-box">
+            <input type="text" id="inputUsername" placeholder="Cari username GitHub...">
+            <button id="tombolCari">Cari</button>
+        </div>
+        <p id="error">User tidak ditemukan!</p>
+        <div class="kartu" id="kartuUser">
+            <img id="avatar" src="" alt="avatar">
+            <h3 id="namaUser"></h3>
+            <p id="bioUser"></p>
+            <p id="repoUser"></p>
+            <p id="followerUser"></p>
+        </div>
+        <div class="riwayat">
+            <h4>🕓 Riwayat Pencarian</h4>
+            <div id="listRiwayat"></div>
+        </div>
+    </div>
+
+    <script type="module">
+
+        import cariUser, { simpanRiwayat, ambilRiwayat } from "./studi-kasus-2.js";
+
+        const listRiwayat = document.getElementById("listRiwayat")
+
+        const tampilKartu = (data) => {
+            document.getElementById("kartuUser").style.display = "block"
+            document.getElementById("avatar").src = data.avatar_url
+            document.getElementById("namaUser").textContent = data.name
+            document.getElementById("bioUser").textContent = data.bio || "Tidak ada bio"
+            document.getElementById("repoUser").textContent = `Repositori : ${data.public_repos}`
+            document.getElementById("followerUser").textContent = `Follower : ${data.followers}`
+        }
+
+        const tampilRiwayat = () => {
+            listRiwayat.innerHTML = ""
+            const riwayat = ambilRiwayat()
+            riwayat.forEach(user => {
+                const span = document.createElement("span")
+                span.style.display = "block"
+                span.textContent = user
+                span.addEventListener("click", async () => {
+                    document.getElementById("inputUsername").value = user
+                    const data = await cariUser(user)
+                    tampilKartu(data)
+                })
+                listRiwayat.appendChild(span)
+            });
+        }
+
+        document.getElementById("tombolCari").addEventListener("click", async () => {
+            try {
+                const username = document.getElementById("inputUsername").value
+                const data = await cariUser(username)
+                simpanRiwayat(username)
+                tampilRiwayat()
+                tampilKartu(data)
+            } catch (error) {
+                const usError = document.getElementById("error")
+                usError.style.display = "block"
+                usError.textContent = "User tidak ditemukan! " + error.message
+
+
+            }
+        })
+        tampilRiwayat()
+
+
+
+        // Tugasmu di sini!
+        // 1. Import semua dari github.js
+        // 2. Buat fungsi tampilRiwayat() → ambil riwayat dari localStorage,
+        //    tampilkan tiap username sebagai <span> di #listRiwayat
+        //    (bonus: kalau span diklik, langsung cari user itu!)
+        // 3. Saat tombol diklik:
+        //    - Ambil nilai input
+        //    - Panggil cariUser() dengan try/catch
+        //    - Kalau berhasil: tampilkan avatar, nama, bio, jumlah repo, followers ke kartu
+        //    - Kalau gagal: tampilkan pesan error di #error
+        //    - Simpan username ke riwayat
+        //    - Update tampilan riwayat
+        // 4. Panggil tampilRiwayat() saat halaman pertama dibuka
+    </script>
+</body>
+
+</html>

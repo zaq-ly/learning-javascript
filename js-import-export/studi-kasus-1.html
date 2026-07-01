@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kartu Nama Digital</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            background: #f0f4f8;
+        }
+
+        .kartu {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            color: #1a1a2e;
+        }
+
+        p {
+            margin: 4px 0;
+            color: #555;
+        }
+
+        .salam {
+            margin-top: 16px;
+            font-style: italic;
+            color: #3a86ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kartu">
+        <h2 id="nama"></h2>
+        <p id="umur"></p>
+        <p id="pekerjaan"></p>
+        <p class="salam" id="salam"></p>
+    </div>
+
+    <script type="module">
+        // Tugasmu di sini!
+
+        import { nama, umur, pekerjaan } from './studi-kasus-1.js'
+
+        import salam from './studi-kasus-1.js'
+
+        document.getElementById("nama").textContent = nama
+        document.getElementById("umur").textContent = umur
+        document.getElementById("pekerjaan").textContent = pekerjaan
+        document.getElementById("salam").textContent = salam("zaqly")
+
+
+
+
+
+    </script>
+</body>
+
+</html>
